@@ -27,14 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $table = 'images';
+    
 
-    //Images
-    //relación One To Many /  Uno a Muchos
+
+    //Images One To Many
     //una solo usuario puede tener muchas imagenes
     public function images(){
-
-        return $this->hasMany('App/Image');
+        return $this->hasMany('App\Images');
     }
 
 
