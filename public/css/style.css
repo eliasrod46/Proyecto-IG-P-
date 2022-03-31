@@ -1,0 +1,17 @@
+.avatar {
+    width: 85px;
+    margin-bottom: 15px;
+    /*margin: 0 auto;*/
+}
+
+.navbar .container-avatar {
+    margin-left: 20px;
+    width: 35px;
+    height: 35px;
+    border-radius: 900px;
+    overflow: hidden;
+}
+
+.navbar .container-avatar .avatar {
+    width: 100%;
+}
