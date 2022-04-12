@@ -46,6 +46,8 @@
     width: 100%;
 }
 
+
+
 .card-body{
     padding: 0px;
 }
@@ -72,4 +74,8 @@
 
 .likes img{
     width: 20px;
+}
+
+.pub_image_detail .comments{
+    padding: 20px;
 }

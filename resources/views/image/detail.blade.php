@@ -7,7 +7,7 @@
             @include('includes.message')
             
                 
-                <div class="card pub-image mb-4">
+                <div class="card pub-image mb-4 pub_image_detail">
                     <div class="card-header ">
                         @if($image->user->image)
                             <div class="container-avatar">
@@ -35,8 +35,45 @@
                         <div class="likes">
                             <img src="{{asset('img/heart-black.png')}}" alt="">
                         </div>
+                        <div class="clearfix"></div>
                         <div class="comments">
-                            <a href="" class="btn btn-warning btn-sm btn-comments">Comentarios({{count($image->comments)}})</a>
+                            <h2>Comentarios({{count($image->comments)}})</h2>
+                            <hr>
+
+                            <form action="{{route('comment.save')}}" method="POST">
+                                @csrf
+
+                                <input type="hidden" name="image_id" value="{{$image->id}}">
+                                <p>
+                                    <textarea class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" name="content" id="content" cols="30" rows="10" required></textarea>
+
+                                    @if ($errors->has('content'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('content') }}</strong>
+                                        </span>
+                                    @endif
+                                
+                                </p>
+
+                                <button type="submit" class="btn btn-success">Enviar</button>
+                            
+                            </form>
+                            <hr>
+                            @foreach ($image->comments as $comment)
+                                <div class="comment">
+                                    <div class="description">
+                                        <span class="nickname">{{'@'.$comment->user->nick}}</span>
+                                        <span class="nickname date">
+                                            {{' | '.\FormatTime::LongTimeFilter($comment->created_at)}}
+                                        </span>
+                                        <p>{{$comment->content}}</p>
+
+                                        @if (Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id == Auth::user()->id))
+                                            <a class="btn btn-sm btn-danger" href="{{ route('comment.delete',['id' => $comment->id])}}">Eliminar</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

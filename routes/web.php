@@ -33,3 +33,6 @@ Route::post('/guardar/imagen', 'ImageController@save')->name('image.save');
 
 Route::get('/image/file/{filename}', 'ImageController@getImage')->name('image.file');
 Route::get('/image/{id}', 'ImageController@detail')->name('image.detail');
+
+Route::post('/comment/save', 'CommentController@store')->name('comment.save');
+Route::get('/comment/delete/{id}', 'CommentController@delete')->name('comment.delete');
